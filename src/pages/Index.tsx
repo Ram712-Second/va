@@ -8,7 +8,16 @@ import MusicPlayer from "@/components/MusicPlayer";
 
 const Index = () => {
   return (
-    <main className="relative">
+    <main
+      className="relative min-h-screen"
+      style={{
+        backgroundImage: "url('/Home.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed"
+      }}
+    >
+      <div className="absolute inset-0 bg-white/60 pointer-events-none" />
       <FloatingHearts />
       <HeroSection />
       <LoveLetterSection />

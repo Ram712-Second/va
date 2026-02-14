@@ -24,7 +24,7 @@ const ProposalSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center py-20 px-4 bg-gradient-to-b from-pink-100 via-rose-300 to-pink-300">
+    <section className="min-h-screen flex items-center justify-center py-20 px-4">
       <div className="text-center">
         <motion.h2
           initial={{ opacity: 0, scale: 0.8 }}

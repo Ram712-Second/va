@@ -10,7 +10,7 @@ const quotes = [
 
 const QuotesSection = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-pink-100 via-rose-200 to-pink-200">
+    <section className="py-20 px-4">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

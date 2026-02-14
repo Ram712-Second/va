@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const LoveLetterSection = () => {
   return (
-    <section id="love-letter" className="min-h-screen flex items-center justify-center py-20 px-4 bg-gradient-to-b from-pink-200 via-rose-100 to-pink-100">
+    <section id="love-letter" className="min-h-screen flex items-center justify-center py-20 px-4">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -6,7 +6,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-100 via-rose-200 to-pink-300">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-10 text-center px-6">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
