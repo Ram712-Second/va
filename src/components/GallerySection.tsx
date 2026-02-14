@@ -9,10 +9,10 @@ const videos = [
 ];
  
 const images = [
-  "https://picsum.photos/400/500?random=1",
-  "https://picsum.photos/400/500?random=2",
-  "https://picsum.photos/400/500?random=3",
-  "https://picsum.photos/400/500?random=4",
+  "/First.jpg",
+  "/Second.jpg",
+  "/Six.jpg",
+  "/Four.jpg",
 ];
 const GallerySection = () => {
   const { pauseMusic, resumeMusic } = useAudio();
