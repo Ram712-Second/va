@@ -33,7 +33,7 @@ const Index = () => {
       <main
         className="relative min-h-screen hidden md:block"
         style={{
-          backgroundImage: "url('/Home.jpeg')",
+          backgroundImage: "url('/Home.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed"
@@ -45,7 +45,7 @@ const Index = () => {
         <LoveLetterSection />
         <QuotesSection />
         <GallerySection />
-        <ProposalSection />
+        {/* <ProposalSection /> */}
         <MusicPlayer />
       </main>
     </>

@@ -9,10 +9,10 @@ const videos = [
 ];
  
 const images = [
-  "/First.jpg",
-  "/Second.jpg",
-  "/Six.jpg",
-  "/Four.jpg",
+  "https://picsum.photos/400/500?random=1",
+  "https://picsum.photos/400/500?random=2",
+  "https://picsum.photos/400/500?random=3",
+  "https://picsum.photos/400/500?random=4",
 ];
 const GallerySection = () => {
   const { pauseMusic, resumeMusic } = useAudio();
@@ -47,6 +47,8 @@ const GallerySection = () => {
   };
 
   const openVideoFullscreen = (src: string) => {
+    // Pause music immediately when opening fullscreen
+    pauseMusic();
     setFullscreenVideo(src);
     setSelected(src);
     setSelectedType("video");
@@ -54,7 +56,6 @@ const GallerySection = () => {
     setTimeout(() => {
       const video = videoRefs.current[src];
       if (video && !playing[src]) {
-        pauseMusic();
         video.play();
         setPlaying({ ...playing, [src]: true });
       }
@@ -84,10 +85,10 @@ const GallerySection = () => {
   return (
     <section className="py-20 px-4">
       <motion.h2
-        initial={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl md:text-4xl font-bold text-red-700 text-center mb-12"
+        className="text-3xl md:text-4xl font-bold text-rose-700 text-center mb-12"
       >
         Our Moments 📸
       </motion.h2>
@@ -153,7 +154,7 @@ const GallerySection = () => {
           {images.map((src, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 1, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
@@ -168,7 +169,6 @@ const GallerySection = () => {
                 src={src}
                 alt={`Gallery photo ${i + 1}`}
                 className="w-full h-48 md:h-56 object-cover object-bottom"
-                loading="lazy"
               />
             </motion.div>
           ))}

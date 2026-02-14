@@ -63,7 +63,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
 
   const pauseMusic = () => {
     const audio = audioRef.current;
-    if (audio && isPlaying) {
+    if (audio && !audio.paused) {
       audio.pause();
       setIsPlaying(false);
     }
@@ -71,12 +71,17 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
 
   const resumeMusic = () => {
     const audio = audioRef.current;
-    if (audio && !isPlaying) {
-      audio.volume = 0.4;
+    if (audio) {
+      // Always unmute when resuming
       audio.muted = false;
-      audio.play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {});
+      setIsMuted(false);
+      // Only play if actually paused
+      if (audio.paused) {
+        audio.volume = 0.4;
+        audio.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
     }
   };
 
