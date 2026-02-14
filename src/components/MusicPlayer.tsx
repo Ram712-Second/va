@@ -1,41 +1,12 @@
-import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, VolumeX, Heart } from "lucide-react";
+import { Music, VolumeX, Volume2, Heart } from "lucide-react";
+import { useAudio } from "@/contexts/AudioContext";
 
 const MusicPlayer = () => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
-
-  const startExperience = () => {
-    setShowWelcome(false);
-    if (audioRef.current) {
-      audioRef.current.volume = 0.4;
-      audioRef.current.play()
-        .then(() => setPlaying(true))
-        .catch(() => {});
-    }
-  };
-
-  const toggle = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      audio.volume = 0.4;
-      audio.play()
-        .then(() => setPlaying(true))
-        .catch(() => {});
-    }
-  };
+  const { isPlaying, isMuted, toggleMute, startExperience, showWelcome } = useAudio();
 
   return (
     <>
-      <audio ref={audioRef} src="/love.mp3" loop preload="auto" />
-      
       {/* Welcome Overlay */}
       <AnimatePresence>
         {showWelcome && (
@@ -76,18 +47,18 @@ const MusicPlayer = () => {
         )}
       </AnimatePresence>
 
-      {/* Music Control Button */}
+      {/* Music Control Button - Mute/Unmute */}
       <motion.button
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5 }}
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
-        onClick={toggle}
+        onClick={toggleMute}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-lg flex items-center justify-center"
-        aria-label={playing ? "Pause music" : "Play music"}
+        aria-label={isMuted ? "Unmute music" : "Mute music"}
       >
-        {playing ? <Music className="w-6 h-6" /> : <VolumeX className="w-6 h-6" />}
+        {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
       </motion.button>
     </>
   );
