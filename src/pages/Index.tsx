@@ -17,7 +17,7 @@ const Index = () => {
         backgroundAttachment: "fixed"
       }}
     >
-      <div className="absolute inset-0 bg-white/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-white/40 pointer-events-none" />
       <FloatingHearts />
       <HeroSection />
       <LoveLetterSection />

@@ -84,10 +84,10 @@ const GallerySection = () => {
   return (
     <section className="py-20 px-4">
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 1, y: 0 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl md:text-4xl font-bold text-rose-700 text-center mb-12"
+        className="text-3xl md:text-4xl font-bold text-red-700 text-center mb-12"
       >
         Our Moments 📸
       </motion.h2>
@@ -153,7 +153,7 @@ const GallerySection = () => {
           {images.map((src, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 1, scale: 1 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
