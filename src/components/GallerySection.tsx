@@ -8,10 +8,10 @@ const videos = [
 ];
  
 const images = [
-  "/First.jpeg",
-  "/Five.jpeg",
-  "/Third.jpeg",
-  "/Four.jpeg",
+  "/First.jpg",
+  "/Five.jpg",
+  "/Third.jpg",
+  "/Four.jpg",
 ];
  
 const GallerySection = () => {
