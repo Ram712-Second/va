@@ -9,8 +9,8 @@ const videos = [
  
 const images = [
   "/First.jpg",
-  "/Five.jpg",
-  "/Third.jpg",
+  "/Second.jpg",
+  "/Six.jpg",
   "/Four.jpg",
 ];
  

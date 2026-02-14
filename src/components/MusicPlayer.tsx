@@ -1,10 +1,25 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Music, VolumeX } from "lucide-react";
 
 const MusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+  const hasStarted = useRef(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && !hasStarted.current) {
+      audio.muted = false;
+      audio.volume = 0.4;
+      audio.play().then(() => {
+        setPlaying(true);
+        hasStarted.current = true;
+      }).catch(() => {
+        // Auto-play blocked, user needs to click
+      });
+    }
+  }, []);
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -18,11 +33,12 @@ const MusicPlayer = () => {
       audio.play().catch(() => {});
     }
     setPlaying(!playing);
+    hasStarted.current = true;
   };
 
   return (
     <>
-      <audio ref={audioRef} src="/love.mp3" loop muted preload="auto" />
+      <audio ref={audioRef} src="/love.mp3" loop preload="auto" />
       <motion.button
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
