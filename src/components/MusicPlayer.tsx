@@ -1,25 +1,21 @@
-import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Music, VolumeX } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music, VolumeX, Heart } from "lucide-react";
 
 const MusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
-  const hasStarted = useRef(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio && !hasStarted.current) {
-      audio.muted = false;
-      audio.volume = 0.4;
-      audio.play().then(() => {
-        setPlaying(true);
-        hasStarted.current = true;
-      }).catch(() => {
-        // Auto-play blocked, user needs to click
-      });
+  const startExperience = () => {
+    setShowWelcome(false);
+    if (audioRef.current) {
+      audioRef.current.volume = 0.4;
+      audioRef.current.play()
+        .then(() => setPlaying(true))
+        .catch(() => {});
     }
-  }, []);
+  };
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -27,18 +23,60 @@ const MusicPlayer = () => {
 
     if (playing) {
       audio.pause();
+      setPlaying(false);
     } else {
-      audio.muted = false;
       audio.volume = 0.4;
-      audio.play().catch(() => {});
+      audio.play()
+        .then(() => setPlaying(true))
+        .catch(() => {});
     }
-    setPlaying(!playing);
-    hasStarted.current = true;
   };
 
   return (
     <>
       <audio ref={audioRef} src="/love.mp3" loop preload="auto" />
+      
+      {/* Welcome Overlay */}
+      <AnimatePresence>
+        {showWelcome && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-rose-500 to-pink-600 p-8 rounded-3xl shadow-2xl text-center max-w-md mx-4"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                <Heart className="w-16 h-16 mx-auto mb-4 text-white fill-white" />
+              </motion.div>
+              <h2 className="text-3xl font-bold text-white mb-3">
+                Welcome! 💕
+              </h2>
+              <p className="text-white/90 mb-6">
+                Click below to start your experience with music
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={startExperience}
+                className="bg-white text-rose-600 px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
+              >
+                Enter ✨
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Music Control Button */}
       <motion.button
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
