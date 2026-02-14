@@ -3,7 +3,7 @@ import { Music, VolumeX, Volume2, Heart } from "lucide-react";
 import { useAudio } from "@/contexts/AudioContext";
 
 const MusicPlayer = () => {
-  const { isPlaying, isMuted, toggleMute, startExperience, showWelcome } = useAudio();
+  const { isPlaying, isMuted, toggleMute, startExperience, showWelcome, isVideoFullscreen } = useAudio();
 
   return (
     <>
@@ -48,18 +48,20 @@ const MusicPlayer = () => {
       </AnimatePresence>
 
       {/* Music Control Button - Mute/Unmute */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.5 }}
-        whileHover={{ scale: 1.15 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={toggleMute}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-lg flex items-center justify-center"
-        aria-label={isMuted ? "Unmute music" : "Mute music"}
-      >
-        {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
-      </motion.button>
+      {!isVideoFullscreen && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.5 }}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={toggleMute}
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-lg flex items-center justify-center"
+          aria-label={isMuted ? "Unmute music" : "Mute music"}
+        >
+          {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+        </motion.button>
+      )}
     </>
   );
 };

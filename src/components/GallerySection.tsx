@@ -15,7 +15,7 @@ const images = [
   "/Four.jpg",
 ];
 const GallerySection = () => {
-  const { pauseMusic, resumeMusic } = useAudio();
+  const { pauseMusic, resumeMusic, setIsVideoFullscreen } = useAudio();
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<"image" | "video">("image");
   const [playing, setPlaying] = useState<{ [key: string]: boolean }>({});
@@ -48,7 +48,9 @@ const GallerySection = () => {
 
   const openVideoFullscreen = (src: string) => {
     // Pause music immediately when opening fullscreen
+    console.log("Opening fullscreen, pausing music...");
     pauseMusic();
+    setIsVideoFullscreen(true);
     setFullscreenVideo(src);
     setSelected(src);
     setSelectedType("video");
@@ -72,6 +74,7 @@ const GallerySection = () => {
       }
       setPlaying({ ...playing, [fullscreenVideo]: false });
     }
+    setIsVideoFullscreen(false);
     setFullscreenVideo(null);
     setSelected(null);
     resumeMusic();
