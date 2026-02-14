@@ -8,24 +8,47 @@ import MusicPlayer from "@/components/MusicPlayer";
 
 const Index = () => {
   return (
-    <main
-      className="relative min-h-screen"
-      style={{
-        backgroundImage: "url('/Home.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed"
-      }}
-    >
-      <div className="absolute inset-0 bg-white/40 pointer-events-none" />
-      <FloatingHearts />
-      <HeroSection />
-      <LoveLetterSection />
-      <QuotesSection />
-      <GallerySection />
-      <ProposalSection />
-      <MusicPlayer />
-    </main>
+    <>
+      {/* Mobile Background */}
+      <main
+        className="relative min-h-screen md:hidden"
+        style={{
+          backgroundImage: "url('/Third.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed"
+        }}
+      >
+        <div className="absolute inset-0 bg-white/20 pointer-events-none" />
+        <FloatingHearts />
+        <HeroSection />
+        <LoveLetterSection />
+        <QuotesSection />
+        <GallerySection />
+        <ProposalSection />
+        <MusicPlayer />
+      </main>
+
+      {/* Desktop Background */}
+      <main
+        className="relative min-h-screen hidden md:block"
+        style={{
+          backgroundImage: "url('/Home.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed"
+        }}
+      >
+        <div className="absolute inset-0 bg-white/20 pointer-events-none" />
+        <FloatingHearts />
+        <HeroSection />
+        <LoveLetterSection />
+        <QuotesSection />
+        <GallerySection />
+        <ProposalSection />
+        <MusicPlayer />
+      </main>
+    </>
   );
 };
 
